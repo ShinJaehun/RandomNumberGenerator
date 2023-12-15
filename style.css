@@ -1,0 +1,39 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    text-align: center;
+    font-size: 30px;
+    color: #454545;
+}
+
+
+.ball{ 
+    color: white;
+    font-size: 6em; 
+    width: 300px; height: 300px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.buttons {
+    margin-top: 20px;
+    
+}
+
+button{
+    font-size: 0.5em;
+    width: 100px; height: 40px;
+    border-radius: 10px;
+    color: black;
+    background-color: #f8e61b;
+    cursor: pointer;
+}
+button:active{
+    font-size: 0.6em;
+    width: 105px; height: 42px; 
+}
