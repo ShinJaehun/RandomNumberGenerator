@@ -1,25 +1,47 @@
 const pickButton = document.getElementById("pick")
-const ball = document.querySelector(".ball")
-ball.style.backgroundColor = "red"
+const ballDiv = document.querySelector(".ball")
+ballDiv.style.backgroundColor = "red"
 
 let stopped=true
-const lottoNumbers = [];
+const balls = [];
 
-initNumbers()
+class Ball {
+  constructor(number, color){
+    this.number=number
+    this.color=color
+  }
+}
+
+initBalls()
 let interval=null
 
 pickButton.addEventListener("click", function(){
-  if(lottoNumbers.length>1){
+  if(balls.length>1){
     picking()
   } else {
+    console.log(balls[0])
+
+    ballDiv.innerText=balls[0].number
+    ballDiv.style.backgroundColor="#"+balls[0].color
+
     stopped=true
-    ball.innerText=lottoNumbers[0]
     getNumber()
     pickButton.innerText = "다시 시작"
-    initNumbers()
+    initBalls()
   }
 })
 
+// function vLerp(A,B,t){
+//   const res={};
+//   for(let attr in A){
+//       res[attr]=lerp(A[attr],B[attr],t);
+//   }
+//   return res;
+// }
+
+// function lerp(a,b,t){
+//   return a+(b-a)*t
+// }
 
 function picking(){
   if(stopped){
@@ -27,7 +49,9 @@ function picking(){
     pickButton.innerText = "뽑아"
     interval = setInterval(function(){
       // ball.innerText = lottoNumbers[Math.floor(Math.random()*24)+1]
-      ball.innerText = lottoNumbers[Math.floor(Math.random()*lottoNumbers.length-1)+1]
+      let pickedNumber = Math.floor(Math.random()*balls.length-1)+1
+      ballDiv.innerText = balls[pickedNumber].number
+      ballDiv.style.backgroundColor="#"+balls[pickedNumber].color
     }, 60)
 
   }else{
@@ -35,8 +59,7 @@ function picking(){
     pickButton.innerText = "뽑아뽑아"
     playSoundEffect()
     clearInterval(interval)
-    interval=null; // 헐 이게 필요 했음.
-    //You really only need to use one variable since interval will be reset to null if the interval has been cleared. If this variable is controlled by another function feel free to change it back.
+    interval=null;
     getNumber()
   }
 }
@@ -46,20 +69,22 @@ function playSoundEffect(){
   audio.play()
 }
 
-function initNumbers(){
-  let lottoNumbersLength=5
-  for (let i=1; i<=lottoNumbersLength; i++){
-    lottoNumbers.push(i)
+function initBalls(){
+  let numbers=5
+  for (let i=1; i<=numbers; i++){
+    balls.push(new Ball(i, Math.floor(Math.random()*16777215).toString(16)))
   }
+  // console.log(balls)
 }
 
 function getNumber(){
-  let num=parseInt(ball.textContent)
-  console.log(num)
-  let index = lottoNumbers.indexOf(num)
-  // console.log(index)
-  if (index>-1){
-    lottoNumbers.splice(index, 1)
-    console.log(lottoNumbers)
+  let num=parseInt(ballDiv.textContent)
+  // console.log(num)
+  for(let i=0; i<balls.length; i++){
+    if(balls[i].number==num){
+      balls.splice(i, 1)
+    }
   }
+  console.log(balls)
 }
+
