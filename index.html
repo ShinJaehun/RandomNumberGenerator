@@ -5,18 +5,44 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="#">
-    <title>PPOBA PPOBA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap" rel="stylesheet">
+    <title>SUKSUK PPOBA</title>
 </head>
 <link rel="stylesheet" href="style.css">
 <body>
     <div class="container">
-        <h1>뽑아뽑아</h1>
+        <h1>쑥쑥뽑아</h1>
         <!-- <canvas id="canvas_ball"></canvas> -->
         <div class="ball">25</div>
         <div class="buttons">
             <button id="pick">시작</button>
+            <button id="setup">설정</button>
         </div>
     </div>
+
+    <div id="settings" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <div class="modal-body">
+                <span id="close" class="close">&times;</span>
+                <div class="form-style">
+                    <div class="form-style-heading">설정</div>
+                    <form action="" id="setting-form">
+                        <label for="field1"><span>이름</span><input type="text" id="username" class="input-field" name="field1" value="" /></label>
+                        <label for="field2"><span>인원</span><input type="text" id="total" class="input-field" name="field2" value="" /></label>
+
+                        <label for="field5"><span>제외할 번호</span><textarea name="field5" id="exnumber" class="textarea-field"></textarea></label>
+                        <label><span> </span><input type="submit" value="적용" /><input type="button" id="cancel" value="취소" /></label>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
     <script src="script.js"></script> 
 </body>
 </html>

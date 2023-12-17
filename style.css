@@ -1,3 +1,7 @@
+.body{
+    font-family: 'Nanum Gothic', sans-serif;
+}
+
 .container{
     display: flex;
     flex-direction: column;
@@ -9,10 +13,10 @@
     color: #454545;
 }
 
-
 .ball{ 
     color: white;
     font-size: 6em; 
+    font-weight: 900;
     width: 300px; height: 300px;
     border-radius: 50%;
     display: flex;
@@ -21,19 +25,164 @@
 }
 
 .buttons {
-    margin-top: 20px;
-    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    text-align: center;
+    margin: 20px 0;
+    font-size: 30px;
+    color: #454545;
 }
 
 button{
     font-size: 0.5em;
+    margin: 0 5px;
     width: 100px; height: 40px;
     border-radius: 10px;
     color: black;
     background-color: #f8e61b;
     cursor: pointer;
 }
-button:active{
+
+button:hover{
     font-size: 0.6em;
     width: 105px; height: 42px; 
+}
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+
+/* Modal Header */
+.modal-header {
+    padding: 2px 16px;
+    background-color: #5cb85c;
+    color: white;
+}
+
+/* Modal Body */
+.modal-body {padding: 2px 16px;}
+
+/* Modal Footer */
+.modal-footer {
+    padding: 2px 16px;
+    background-color: #5cb85c;
+    color: white;
+}
+
+/* Modal Content */
+.modal-content {
+    position: relative;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 0;
+    border: 1px solid #888;
+    width: 50%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    animation-name: animatetop;
+    animation-duration: 0.4s
+}
+
+.form-style{
+	max-width: 500px;
+	padding: 20px 12px 10px 20px;
+	font: 13px Arial, Helvetica, sans-serif;
+}
+.form-style-heading{
+	font-weight: bold;
+	font-style: italic;
+	border-bottom: 2px solid #ddd;
+	margin-bottom: 20px;
+	font-size: 15px;
+	padding-bottom: 3px;
+}
+.form-style label{
+	display: block;
+	margin: 0px 0px 15px 0px;
+}
+.form-style label > span{
+	width: 100px;
+	font-weight: bold;
+	float: left;
+	padding-top: 8px;
+	padding-right: 5px;
+}
+.form-style span.required{
+	color:red;
+}
+.form-style .tel-number-field{
+	width: 40px;
+	text-align: center;
+}
+.form-style input.input-field, .form-style .select-field{
+	width: 48%;	
+}
+.form-style input.input-field, 
+.form-style .tel-number-field, 
+.form-style .textarea-field, 
+.form-style .select-field{
+	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	border: 1px solid #C2C2C2;
+	box-shadow: 1px 1px 4px #EBEBEB;
+	-moz-box-shadow: 1px 1px 4px #EBEBEB;
+	-webkit-box-shadow: 1px 1px 4px #EBEBEB;
+	border-radius: 3px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	padding: 7px;
+	outline: none;
+}
+.form-style .input-field:focus, 
+.form-style .tel-number-field:focus, 
+.form-style .textarea-field:focus,  
+.form-style .select-field:focus{
+	border: 1px solid #0C0;
+}
+.form-style .textarea-field{
+	height:100px;
+	width: 55%;
+}
+.form-style input[type=submit],
+.form-style input[type=button]{
+    margin: 0 5px;
+    width: 100px; height: 40px;
+    border-radius: 10px;
+    color: black;
+    background-color: #f8e61b;
+    cursor: pointer;
+}
+
+/* The Close Button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Add Animation */
+@keyframes animatetop {
+from {top: -300px; opacity: 0}
+to {top: 0; opacity: 1}
 }
