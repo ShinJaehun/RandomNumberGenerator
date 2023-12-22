@@ -7,10 +7,23 @@ const setupBtn = document.getElementById("setup");
 // Get the <span> element that closes the modal
 const closeSpan = document.getElementById("close");
 const cancelBtn = document.getElementById("cancel");
+const initBtn=document.getElementById("init");
+
+const storage=localStorage
+const usernameInput=document.getElementById("username")
+const totalInput = document.getElementById("total");
+const exnumbersInput = document.getElementById("exnumbers");
 
 // When the user clicks on the button, open the modal
 setupBtn.onclick = function() {
+  stopped=true
+  clearInterval(interval)
+
   settingsModal.style.display = "block";
+
+  usernameInput.value=storage['username'] ?? "noname"
+  totalInput.value=storage['total'] ?? firstN
+  exnumbersInput.value=storage['exnumbers'] ?? 0
 }
 
 // When the user clicks on <span> (x), close the modal
@@ -33,17 +46,24 @@ const settingForm = document.getElementById("setting-form");
 settingForm.addEventListener("submit", (e) => {
   e.preventDefault();
 
-  let total = document.getElementById("total");
-  let exnumber = document.getElementById("exnumber");
-
-  if (total.value == "" || exnumber.value == "") {
+  if (total.value == "" || exnumbers.value == "") {
     alert("Ensure you input a value in both fields!");
   } else {
     // perform operation with form input
     alert("This form has been successfully submitted!");
-    console.log(
-      `This form has a 인원 of ${total.value} and 제외할 번호 of ${exnumber.value}`
-    );
+    storage['username']=usernameInput.value
+    storage['total']=totalInput.value
+    storage['exnumbers']=exnumbersInput.value
+    // console.log(
+    //   `This form has a 인원 of ${total.value} and 제외할 번호 of ${exnumber.value}`
+    // );
+    init()
     settingsModal.style.display = "none";
   }
 });
+
+initBtn.onclick=function(){
+  storage.clear()
+  init()
+  settingsModal.style.display="none"
+}

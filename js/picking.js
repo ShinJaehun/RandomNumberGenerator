@@ -6,7 +6,9 @@ function picking(balls){
       // ball.innerText = lottoNumbers[Math.floor(Math.random()*24)+1]
       let pickedNumber = Math.floor(Math.random()*balls.length-1)+1
       ballDiv.innerText = balls[pickedNumber].number
-      ballDiv.style.backgroundColor="#"+balls[pickedNumber].color
+      // ballDiv.style.backgroundColor="#"+balls[pickedNumber].color
+      ballDiv.style.backgroundColor=balls[pickedNumber].color
+
       // ballDiv.style.textShadow="-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black"
     }, 60)
 
@@ -16,7 +18,7 @@ function picking(balls){
     playSoundEffect()
     clearInterval(interval)
     interval=null;
-    getNumber(balls)
+    getBall(balls)
   }
 }
 
@@ -25,7 +27,7 @@ function playSoundEffect(){
   audio.play()
 }
 
-function getNumber(balls){
+function getBall(balls){
   let num=parseInt(ballDiv.textContent)
   // console.log(num)
   for(let i=0; i<balls.length; i++){
@@ -33,8 +35,9 @@ function getNumber(balls){
       balls.splice(i, 1)
     }
   }
-  console.log(balls)
+  // console.log(balls)
 }
+
 
 // function vLerp(A,B,t){
 //   const res={};
