@@ -3,12 +3,9 @@ function picking(balls){
     stopped=false
     pickButton.innerText = "뽑아"
     interval = setInterval(function(){
-      // ball.innerText = lottoNumbers[Math.floor(Math.random()*24)+1]
       let pickedNumber = Math.floor(Math.random()*balls.length-1)+1
       ballDiv.innerText = balls[pickedNumber].number
-      // ballDiv.style.backgroundColor="#"+balls[pickedNumber].color
       ballDiv.style.backgroundColor=balls[pickedNumber].color
-
       // ballDiv.style.textShadow="-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black"
     }, 60)
 
@@ -37,7 +34,6 @@ function getBall(balls){
   }
   console.log(balls)
 }
-
 
 // function vLerp(A,B,t){
 //   const res={};
