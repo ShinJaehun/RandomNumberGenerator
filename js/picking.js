@@ -35,7 +35,7 @@ function getBall(balls){
       balls.splice(i, 1)
     }
   }
-  // console.log(balls)
+  console.log(balls)
 }
 
 

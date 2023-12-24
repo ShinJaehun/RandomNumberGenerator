@@ -1,15 +1,19 @@
 const ballDiv = document.querySelector(".ball")
 const pickButton = document.getElementById("pick")
 
+const firstN=10
 let stopped=true
 let interval=null
-const firstN=10
-let n=firstN
-let balls = [];
-
 function main() {
-  init()
-  console.log("main n: "+n)
+
+
+  let n=firstN
+  let balls = [];
+
+  n=init()
+  balls=initBalls(n) // 실제 뽑기할 balls
+
+  // console.log("main n: "+n)
   
   pickButton.addEventListener("click", function(){
     if(balls.length>1){
@@ -20,10 +24,10 @@ function main() {
       ballDiv.innerText=balls[0].number
       ballDiv.style.backgroundColor=balls[0].color
 
-      stopped=true
+      // stopped=true
       getBall(balls)
       pickButton.innerText = "다시 시작"
-      console.log("pickButton"+n)
+      // console.log("pickButton n: "+n)
       balls=initBalls(n)
     }
   })
@@ -74,27 +78,24 @@ function init(){
   //   ballDiv.style.backgroundColor="red"
   // }
 
-  balls=initBalls(n)
-  ballDiv.innerText=n
-  ballDiv.style.backgroundColor=balls[n-1].color
+  // 근데 굳이 이렇게 할 필요가...
+  // balls=initBalls(n) // 첨에 볼 화면에 표시할 balls 
+  // ballDiv.innerText=n
+  // ballDiv.style.backgroundColor=balls[n-1].color
   
+  return n
 }
   
 function initBalls(numbers){
-  console.log(numbers)
+  // console.log(numbers)
   let balls=[]
   for (let i=1; i<=numbers; i++){
     // balls.push(new Ball(i, Math.floor(Math.random()*16777215).toString(16)))
     
-    balls.push(new Ball(i, randomColor()))
+    // balls.push(new Ball(i, randomColor()))
+    balls.push(new Ball(i))
+
   }
   // console.log(balls)
   return balls
-}
-
-function randomColor(){
-  r = Math.floor(Math.random() * 241);
-  g = Math.floor(Math.random() * 241);
-  b = Math.floor(Math.random() * 241);
-  return `rgb(${r}, ${g}, ${b})`;
 }
