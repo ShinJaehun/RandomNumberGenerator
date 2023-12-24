@@ -41,27 +41,6 @@ window.onclick = function(event) {
   }
 }
 
-const settingForm = document.getElementById("setting-form");
-
-settingForm.addEventListener("submit", (e) => {
-  e.preventDefault();
-
-  if (total.value == "" || exnumbers.value == "") {
-    alert("Ensure you input a value in both fields!");
-  } else {
-    // perform operation with form input
-    alert("This form has been successfully submitted!");
-    storage['username']=usernameInput.value
-    storage['total']=totalInput.value
-    storage['exnumbers']=exnumbersInput.value
-    // console.log(
-    //   `This form has a 인원 of ${total.value} and 제외할 번호 of ${exnumber.value}`
-    // );
-    init()
-    settingsModal.style.display = "none";
-  }
-});
-
 initBtn.onclick=function(){
   storage.clear()
   init()
