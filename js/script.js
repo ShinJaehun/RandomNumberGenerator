@@ -49,7 +49,9 @@ function main() {
     pickButton.innerText = "다시 시작"
     let storage=localStorage
     let n=storage['total'] ?? firstN
-    initBalls(n) // 첨에 볼 화면에 표시할 balls 
+    let exnumbers=storage['exnumbers'] ? JSON.parse(storage['exnumbers']) : null 
+
+    initBalls(n, exnumbers) // 첨에 볼 화면에 표시할 balls 
   }
 })
 
@@ -70,19 +72,19 @@ function main() {
       let exnumbers=exnumbersInput.value.split(",").map(Number).filter(x=>x>0 && x<total)
       // let exnumbers=exnumbersInput.value.split(",").filter(y => y < total).map(x => x.trim())// trim은 없어도 되는게 위에서 걸러짐!
 
-      // console.log(total)
-      // console.log(exnumbers)
+      console.log(total)
+      console.log(exnumbers)
 
       storage['username']=username
       storage['total']=total
-      storage['exnumbers']=exnumbers
+      storage['exnumbers']=JSON.stringify(exnumbers)
 
-      initBalls(total) // initBalls(total)이렇게 처리하고 init()는 시작할 때 딱 한번만 실행되게
+      initBalls(total, exnumbers) // initBalls(total)이렇게 처리하고 init()는 시작할 때 딱 한번만 실행되게
       // event listener를 setupModal.js로 옮기고 싶은데 balls를 main() 스코프 안에서 처리해야 하기 때문에 여기 있음...
 
-      ballDiv.innerText=total
-      ballDiv.style.backgroundColor=balls[total-1].color
-
+      // ballDiv.innerText=total
+      // ballDiv.style.backgroundColor=balls[total-1].color
+      ballDiv.style.backgroundColor="white"
       settingsModal.style.display = "none";
 
     }
@@ -94,24 +96,36 @@ function init(){
 
   let username=storage['username'] ?? "noname"
   let n=storage['total'] ?? firstN
-  let exnumbers=storage['exnumbers'] ?? 0
+  // let exnumbers=JSON.parse(storage['exnumbers']) ?? null
+  let exnumbers=storage['exnumbers'] ? JSON.parse(storage['exnumbers']) : null 
+  // console.log(JSON.parse(storage['exnumbers']))
+  // console.log("init n: "+n)
+  console.log("init exnumbers: "+exnumbers)
 
-  console.log("init n: "+n)
-
-  initBalls(n) // 첨에 볼 화면에 표시할 balls 
-  ballDiv.innerText=n
-  ballDiv.style.backgroundColor=balls[n-1].color
+  initBalls(n, exnumbers) // 첨에 볼 화면에 표시할 balls 
+  // ballDiv.innerText=n
+  // ballDiv.style.backgroundColor=balls[n-1].color
+  ballDiv.style.backgroundColor="white"
+  settingsModal.style.display="none"
 }
   
-function initBalls(numbers){
+function initBalls(numbers, exnumbers){
   console.log("initBalls n: "+numbers)
+  console.log("initBalls exnumbers: "+exnumbers)
+
   balls=[]
-  for (let i=1; i<=numbers; i++){
-    balls.push(new Ball(i))
+  if(exnumbers != null){
+    for (let i=1; i<=numbers; i++){
+      if(!exnumbers.includes(i)){
+        balls.push(new Ball(i))
+      }
+    }
+  }else{
+    for (let i=1; i<=numbers; i++){
+      balls.push(new Ball(i))
+    }  
   }
+  
   console.log(balls)
-  // return balls
-  // ballDiv.innerText=numbers
-  // ballDiv.style.backgroundColor=balls[numbers-1].color
 }
 

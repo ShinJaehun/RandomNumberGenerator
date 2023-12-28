@@ -23,7 +23,8 @@ setupBtn.onclick = function() {
 
   usernameInput.value=storage['username'] ?? "noname"
   totalInput.value=storage['total'] ?? firstN
-  exnumbersInput.value=storage['exnumbers'] ?? 0
+  let exnumbers=storage['exnumbers'] ? JSON.parse(storage['exnumbers']) : 0 
+  exnumbersInput.value=exnumbers
 }
 
 // When the user clicks on <span> (x), close the modal
@@ -44,5 +45,4 @@ window.onclick = function(event) {
 initBtn.onclick=function(){
   storage.clear()
   init()
-  settingsModal.style.display="none"
 }
