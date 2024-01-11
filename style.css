@@ -156,6 +156,9 @@ button:hover{
 	height:100px;
 	width: 55%;
 }
+.form-style #init {
+    margin-left: 100px;
+}
 .form-style input[type=submit],
 .form-style input[type=button]{
     margin: 0 5px;
@@ -186,3 +189,4 @@ button:hover{
 from {top: -300px; opacity: 0}
 to {top: 0; opacity: 1}
 }
+
