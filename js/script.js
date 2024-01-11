@@ -1,4 +1,6 @@
 const ballDiv = document.querySelector(".ball")
+const ballContainerDiv = document.querySelector(".ball-container")
+
 const pickButton = document.getElementById("pick")
 const settingForm = document.getElementById("setting-form");
 const initBtn=document.getElementById("init");
@@ -15,14 +17,16 @@ function main() {
   pickButton.addEventListener("click", function(){
     if(balls.length>1){
       picking(balls)
-    }else{
+    }else if(balls.length==1){
       ballDiv.innerText=balls[0].number
       ballDiv.style.backgroundColor=balls[0].color
 
       getBall(balls)
       // console.log("pickButton n: "+n)
+      pickButton.innerText = "다시"
 
-      pickButton.innerText = "다시 시작"
+    }else{
+
       let storage=localStorage
       let total=storage['total'] ?? firstN
       let exnumbers=storage['exnumbers'] ? JSON.parse(storage['exnumbers']) : null 
@@ -55,9 +59,6 @@ function main() {
       storage['exnumbers']=JSON.stringify(exnumbers)
 
       balls=initBalls(total, exnumbers)
-
-      ballDiv.style.backgroundColor="white"
-      settingsModal.style.display = "none";
     }
   });
   
@@ -79,8 +80,6 @@ function init(){
   let balls=[]
   balls=initBalls(total, exnumbers)
 
-  ballDiv.style.backgroundColor="white"
-  settingsModal.style.display="none"
   return balls
 }
   
@@ -100,7 +99,12 @@ function initBalls(numbers, exnumbers){
       balls.push(new Ball(i))
     }
   }
-  
+  emptyContainer()  
+
+  pickButton.innerText = "시작" 
+  ballDiv.style.backgroundColor="white"
+  settingsModal.style.display="none"
+
   // console.log(balls)
   return balls
 }

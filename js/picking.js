@@ -29,11 +29,28 @@ function getBall(balls){
   // console.log(num)
   for(let i=0; i<balls.length; i++){
     if(balls[i].number==num){
-      balls.splice(i, 1)
+      // ballContainerDiv.innerText=balls[i].number
+      // balls.splice(i, 1)x
+      toContainer(i, balls)
     }
   }
   console.log(balls)
 }
+
+function toContainer(num, balls){
+  ballContainerDiv.innerHTML+=
+    `<div class="picked-ball" 
+      style="background-color:${balls[num].color}">
+      ${balls[num].number}
+    </div>`
+  
+  balls.splice(num, 1)
+}
+
+function emptyContainer(){
+  document.querySelectorAll(".picked-ball").forEach(el => el.remove());
+}
+
 
 // function vLerp(A,B,t){
 //   const res={};
