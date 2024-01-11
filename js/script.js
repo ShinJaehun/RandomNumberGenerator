@@ -1,6 +1,7 @@
 const ballDiv = document.querySelector(".ball")
 const pickButton = document.getElementById("pick")
 const settingForm = document.getElementById("setting-form");
+const initBtn=document.getElementById("init");
 
 let stopped=true
 let interval=null
@@ -41,25 +42,29 @@ function main() {
       alert("'제외할 번호'에는 숫자와 쉼표만 입력할 수 있습니다.")
     }else{
       alert("입력한 내용을 반영합니다!");
+
       let username=usernameInput.value.trim()
       let total=totalInput.value.trim()
       let exnumbers=exnumbersInput.value.split(",").map(Number).filter(x=>x>0 && x<total)
-      // let exnumbers=exnumbersInput.value.split(",").filter(y => y < total).map(x => x.trim())// trim은 없어도 되는게 위에서 걸러짐!
 
-      console.log(total)
-      console.log(exnumbers)
+      // console.log(total)
+      // console.log(exnumbers)
 
       storage['username']=username
       storage['total']=total
       storage['exnumbers']=JSON.stringify(exnumbers)
 
       balls=initBalls(total, exnumbers)
-      // event listener를 setupModal.js로 옮기고 싶은데 balls를 main() 스코프 안에서 처리해야 하기 때문에 여기 있음...
 
       ballDiv.style.backgroundColor="white"
       settingsModal.style.display = "none";
     }
   });
+  
+  initBtn.onclick=function(){
+    storage.clear()
+    balls=init()
+  }
 }
 
 function init(){
@@ -69,7 +74,7 @@ function init(){
   let total=storage['total'] ?? firstN
   let exnumbers=storage['exnumbers'] ? JSON.parse(storage['exnumbers']) : null 
 
-  console.log("init exnumbers: "+exnumbers)
+  // console.log("init exnumbers: "+exnumbers)
 
   let balls=[]
   balls=initBalls(total, exnumbers)
@@ -80,8 +85,8 @@ function init(){
 }
   
 function initBalls(numbers, exnumbers){
-  console.log("initBalls n: "+numbers)
-  console.log("initBalls exnumbers: "+exnumbers)
+  // console.log("initBalls n: "+numbers)
+  // console.log("initBalls exnumbers: "+exnumbers)
 
   let balls=[]
   if(exnumbers != null){

@@ -156,8 +156,8 @@ button:hover{
 	height:100px;
 	width: 55%;
 }
-.form-style #init {
-    margin-left: 100px;
+.form-style label:last-child{
+    text-align: center;
 }
 .form-style input[type=submit],
 .form-style input[type=button]{

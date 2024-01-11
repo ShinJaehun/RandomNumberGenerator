@@ -7,7 +7,6 @@ const setupBtn = document.getElementById("setup");
 // Get the <span> element that closes the modal
 const closeSpan = document.getElementById("close");
 const cancelBtn = document.getElementById("cancel");
-const initBtn=document.getElementById("init");
 
 const storage=localStorage
 const usernameInput=document.getElementById("username")
@@ -40,9 +39,4 @@ window.onclick = function(event) {
   if (event.target == settingsModal) {
     settingsModal.style.display = "none";
   }
-}
-
-initBtn.onclick=function(){
-  storage.clear()
-  init()
 }
