@@ -9,6 +9,7 @@ let stopped=true
 let interval=null
 
 const firstN=10
+const ballContainerColNum=8
 
 function main() {
   let balls=[];

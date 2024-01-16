@@ -30,27 +30,43 @@ function getBall(balls){
   for(let i=0; i<balls.length; i++){
     if(balls[i].number==num){
       // ballContainerDiv.innerText=balls[i].number
-      // balls.splice(i, 1)x
+      // balls.splice(i, 1)
       toContainer(i, balls)
+      
+      // ballContainerDiv.innerHTML+=
+      // `<div class="picked-ball" 
+      //   style="background-color:${balls[i].color}">
+      //   ${balls[i].number}
+      // </div>`
+      // balls.splice(i, 1)
+
     }
   }
   console.log(balls)
 }
 
 function toContainer(num, balls){
-  ballContainerDiv.innerHTML+=
-    `<div class="picked-ball" 
-      style="background-color:${balls[num].color}">
-      ${balls[num].number}
-    </div>`
+  // console.log(document.querySelectorAll(".ball-container .row .picked-ball").length)
+  if(document.querySelectorAll(".ball-container .row .picked-ball").length==0 ||
+    document.querySelectorAll(".ball-container .row .picked-ball").length%ballContainerColNum==0){
   
+    let rowDiv=ballContainerDiv.appendChild(document.createElement("div"))
+    rowDiv.className="row"
+  }
+  // console.log(ballContainerDiv.lastElementChild)
+  let lastRowDiv=ballContainerDiv.lastElementChild
+  let colDiv=lastRowDiv.appendChild(document.createElement("div"))
+  colDiv.className="picked-ball"
+  colDiv.style="background-color:"+balls[num].color
+  colDiv.innerText=balls[num].number
+
   balls.splice(num, 1)
 }
 
 function emptyContainer(){
-  document.querySelectorAll(".picked-ball").forEach(el => el.remove());
+  document.querySelectorAll(".ball-container .row .picked-ball").forEach(el => el.remove());
+  document.querySelectorAll(".ball-container .row").forEach(el=>el.remove())
 }
-
 
 // function vLerp(A,B,t){
 //   const res={};

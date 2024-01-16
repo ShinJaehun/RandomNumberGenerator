@@ -55,7 +55,7 @@ button:hover{
     width: 105px; height: 42px; 
 }
 
-.ball-container {
+.ball-container .row{
     display: flex;
     flex-wrap: wrap;
 }
