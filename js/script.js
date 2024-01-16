@@ -9,9 +9,16 @@ let stopped=true
 let interval=null
 
 const firstN=10
-const ballContainerColNum=8
+let ballContainerColNum=8
 
 function main() {
+  console.log(window.screen.width)
+  if (window.screen.width <= 450) {
+    //mediaquery로 메뉴, 공의 크기 다 조정해야 하는데
+    //일단 이것만 responsive design을 적용해봤음! 
+    ballContainerColNum=5
+  }
+
   let balls=[];
   balls=init()
   
