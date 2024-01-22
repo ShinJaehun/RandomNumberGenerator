@@ -88,7 +88,6 @@ button:hover{
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
 
-
 /* Modal Header */
 .modal-header {
     padding: 2px 16px;
@@ -98,6 +97,20 @@ button:hover{
 
 /* Modal Body */
 .modal-body {padding: 2px 16px;}
+
+/* 
+@media(max-width: 600px) {
+    .modal-body {
+        background-color: red;
+    }
+}
+
+@media(max-width: 300px) {
+    .modal-body {
+        background-color: green;
+    }
+}
+*/
 
 /* Modal Footer */
 .modal-footer {
@@ -117,6 +130,18 @@ button:hover{
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
     animation-name: animatetop;
     animation-duration: 0.4s
+}
+
+@media(max-width: 600px) {
+    .modal-content {
+        width: 80%;
+    }
+}
+
+@media(max-width: 300px) {
+    .modal-content {
+        width: 90%;
+    }
 }
 
 .form-style{
@@ -153,6 +178,13 @@ button:hover{
 .form-style input.input-field, .form-style .select-field{
 	width: 48%;	
 }
+
+@media(max-width: 600px) {
+    .form-style input.input-field, .form-style .select-field{
+        width: 40%;	
+    }
+}
+
 .form-style input.input-field, 
 .form-style .tel-number-field, 
 .form-style .textarea-field, 
@@ -180,6 +212,14 @@ button:hover{
 	height:100px;
 	width: 55%;
 }
+
+@media(max-width: 600px) {
+    .form-style .textarea-field{
+        height:80px;
+        width: 50%;
+    }
+}
+
 .form-style label:last-child{
     text-align: center;
 }
@@ -191,6 +231,21 @@ button:hover{
     color: black;
     background-color: #f8e61b;
     cursor: pointer;
+}
+
+@media(max-width: 600px) {
+    .form-style input[type=submit],
+    .form-style input[type=button]{
+        margin: 0;
+        width: 70px
+    }
+}
+
+@media(max-width: 300px) {
+    .form-style input[type=submit],
+    .form-style input[type=button]{
+        width: 65px
+    }
 }
 
 /* The Close Button */
