@@ -1,5 +1,6 @@
 const ballDiv = document.querySelector(".ball")
 const ballContainerDiv = document.querySelector(".ball-container")
+const pickedBallDiv = document.querySelector(".picked-ball")
 
 const pickButton = document.getElementById("pick")
 const settingForm = document.getElementById("setting-form");
@@ -12,24 +13,35 @@ const firstN=10
 let ballContainerColNum=8
 
 function main() {
-  console.log(window.screen.width)
+  // console.log(window.screen.width)
+  if (window.screen.width <= 550) {
+    ballContainerColNum=6
+  }
+
   if (window.screen.width <= 450) {
-    //mediaquery로 메뉴, 공의 크기 다 조정해야 하는데
-    //일단 이것만 responsive design을 적용해봤음! 
     ballContainerColNum=5
   }
 
-  let balls=[];
+  if (window.screen.width <= 380) {
+    ballContainerColNum=4
+  }
+
+  if (window.screen.width <= 300) {
+    ballContainerColNum=3
+  }
+
+  let balls=[]
+  let pickedBalls=[]
   balls=init()
   
   pickButton.addEventListener("click", function(){
     if(balls.length>1){
-      picking(balls)
+      picking(balls, pickedBalls)
     }else if(balls.length==1){
       ballDiv.innerText=balls[0].number
       ballDiv.style.backgroundColor=balls[0].color
 
-      getBall(balls)
+      getBall(balls, pickedBalls)
       // console.log("pickButton n: "+n)
       pickButton.innerText = "다시"
 
@@ -74,6 +86,10 @@ function main() {
     storage.clear()
     balls=init()
   }
+
+  // pickedBallDiv.addEventListener("click", function(){
+  //   console.log("$pickedBallDiv.textContent")
+  // })
 }
 
 function init(){
@@ -99,12 +115,12 @@ function initBalls(numbers, exnumbers){
   if(exnumbers != null){
     for (let i=1; i<=numbers; i++){
       if(!exnumbers.includes(i)){
-        balls.push(new Ball(i))
+        balls.push(new Ball(i, randomColor()))
       }
     }
   }else{
     for (let i=1; i<=numbers; i++){
-      balls.push(new Ball(i))
+      balls.push(new Ball(i, randomColor()))
     }
   }
   emptyContainer()  
@@ -115,4 +131,11 @@ function initBalls(numbers, exnumbers){
 
   // console.log(balls)
   return balls
+}
+
+function randomColor(){
+  let r = Math.floor(Math.random() * 241);
+  let g = Math.floor(Math.random() * 241);
+  let b = Math.floor(Math.random() * 241);
+  return `rgb(${r}, ${g}, ${b})`;
 }

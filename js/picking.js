@@ -1,4 +1,4 @@
-function picking(balls){
+function picking(balls, pickedBalls){
   if(stopped){
     stopped=false
     pickButton.innerText = "뽑아"
@@ -15,7 +15,7 @@ function picking(balls){
     playSoundEffect()
     clearInterval(interval)
     interval=null;
-    getBall(balls)
+    getBall(balls, pickedBalls)
   }
 }
 
@@ -24,14 +24,12 @@ function playSoundEffect(){
   audio.play()
 }
 
-function getBall(balls){
+function getBall(balls, pickedBalls){
   let num=parseInt(ballDiv.textContent)
   // console.log(num)
   for(let i=0; i<balls.length; i++){
     if(balls[i].number==num){
-      // ballContainerDiv.innerText=balls[i].number
-      // balls.splice(i, 1)
-      toContainer(i, balls)
+      organizeBalls(i, balls, pickedBalls)
       
       // ballContainerDiv.innerHTML+=
       // `<div class="picked-ball" 
@@ -42,11 +40,21 @@ function getBall(balls){
 
     }
   }
+  // console.log(balls)
+}
+
+function organizeBalls(num, balls, pickedBalls){
+
+  pickedBalls.push(new Ball(balls[num].number, balls[num].color))
+  console.log(pickedBalls)
+  // console.log(document.querySelectorAll(".ball-container .row .picked-ball").length)
+  toContainer(num, balls)
+
+  balls.splice(num, 1)
   console.log(balls)
 }
 
 function toContainer(num, balls){
-  // console.log(document.querySelectorAll(".ball-container .row .picked-ball").length)
   if(document.querySelectorAll(".ball-container .row .picked-ball").length==0 ||
     document.querySelectorAll(".ball-container .row .picked-ball").length%ballContainerColNum==0){
   
@@ -60,7 +68,9 @@ function toContainer(num, balls){
   colDiv.style="background-color:"+balls[num].color
   colDiv.innerText=balls[num].number
 
-  balls.splice(num, 1)
+  colDiv.addEventListener("click", function(){
+    console.log(colDiv.textContent)
+  })
 }
 
 function emptyContainer(){
