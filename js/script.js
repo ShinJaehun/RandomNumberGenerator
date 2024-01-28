@@ -1,6 +1,6 @@
 const ballDiv = document.querySelector(".ball")
 const ballContainerDiv = document.querySelector(".ball-container")
-const pickedBallDiv = document.querySelector(".picked-ball")
+// const pickedBallDivs = document.querySelectorAll(".picked-ball")
 
 const pickButton = document.getElementById("pick")
 const settingForm = document.getElementById("setting-form");
@@ -44,7 +44,7 @@ function main() {
       getBall(balls, pickedBalls)
       // console.log("pickButton n: "+n)
       pickButton.innerText = "다시"
-
+      pickedBalls=[]
     }else{
 
       let storage=localStorage
@@ -86,10 +86,6 @@ function main() {
     storage.clear()
     balls=init()
   }
-
-  // pickedBallDiv.addEventListener("click", function(){
-  //   console.log("$pickedBallDiv.textContent")
-  // })
 }
 
 function init(){

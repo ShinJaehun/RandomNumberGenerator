@@ -26,51 +26,68 @@ function playSoundEffect(){
 
 function getBall(balls, pickedBalls){
   let num=parseInt(ballDiv.textContent)
-  // console.log(num)
   for(let i=0; i<balls.length; i++){
     if(balls[i].number==num){
-      organizeBalls(i, balls, pickedBalls)
-      
-      // ballContainerDiv.innerHTML+=
-      // `<div class="picked-ball" 
-      //   style="background-color:${balls[i].color}">
-      //   ${balls[i].number}
-      // </div>`
-      // balls.splice(i, 1)
+      // 이렇게 하니까 클릭 이후에 새로 그려진 pickedBalls에는 이벤트핸들러가 사라짐
+      // let lastPickedBallDiv = organizeBalls(i, balls, pickedBalls)
+      // lastPickedBallDiv.addEventListener("click", function(){
+      //   let num = pickedBalls.findIndex(ball => ball.number == lastPickedBallDiv.id)
+      //   // console.log(pickedBalls.findIndex(ball => ball.number == number))
+      //   balls.push(new Ball(pickedBalls[num].number, pickedBalls[num].color))
 
+      //   pickedBalls.splice(num, 1)
+      //   console.log(balls)
+      //   console.log(pickedBalls)
+
+      //   emptyContainer()
+
+      //   for(let i=0; i<pickedBalls.length; i++){
+      //     toContainer(pickedBalls[i].number, pickedBalls[i].color)
+      //   }
+      // })
+ 
+      const lastPickedBallDiv=toContainer(balls[i].number, balls[i].color)
+      moveBalls(i, balls, pickedBalls)
+
+      lastPickedBallDiv.addEventListener("click", function(e){
+        let num = pickedBalls.findIndex(ball=>ball.number==e.target.id)
+        moveBalls(num, pickedBalls, balls)
+        e.target.remove()
+      })
     }
   }
-  // console.log(balls)
 }
 
-function organizeBalls(num, balls, pickedBalls){
+// function organizeBalls(num, balls, pickedBalls){
+//   pickedBalls.push(new Ball(balls[num].number, balls[num].color))
+//   let colDiv=toContainer(balls[num].number, balls[num].color, pickedBalls)
+//   balls.splice(num, 1)
+//   // console.log(balls)
+//   return colDiv
+// }
 
-  pickedBalls.push(new Ball(balls[num].number, balls[num].color))
-  console.log(pickedBalls)
-  // console.log(document.querySelectorAll(".ball-container .row .picked-ball").length)
-  toContainer(num, balls)
-
-  balls.splice(num, 1)
-  console.log(balls)
+function moveBalls(num, ballsA, ballsB){
+  ballsB.push(new Ball(ballsA[num].number, ballsA[num].color))
+  ballsA.splice(num, 1)
+  console.log(ballsA)
+  console.log(ballsB)
 }
 
-function toContainer(num, balls){
+function toContainer(number, color){
   if(document.querySelectorAll(".ball-container .row .picked-ball").length==0 ||
     document.querySelectorAll(".ball-container .row .picked-ball").length%ballContainerColNum==0){
-  
+    console.log("hello")
     let rowDiv=ballContainerDiv.appendChild(document.createElement("div"))
     rowDiv.className="row"
   }
-  // console.log(ballContainerDiv.lastElementChild)
+
   let lastRowDiv=ballContainerDiv.lastElementChild
   let colDiv=lastRowDiv.appendChild(document.createElement("div"))
   colDiv.className="picked-ball"
-  colDiv.style="background-color:"+balls[num].color
-  colDiv.innerText=balls[num].number
-
-  colDiv.addEventListener("click", function(){
-    console.log(colDiv.textContent)
-  })
+  colDiv.id=number
+  colDiv.style="background-color:"+color
+  colDiv.innerText=number
+  return colDiv
 }
 
 function emptyContainer(){
