@@ -86,9 +86,14 @@ function main() {
     storage.clear()
     balls=init()
   }
+
+  initEventListener()
+
+
 }
 
 function init(){
+
   let storage=localStorage
 
   let username=storage['username'] ?? "noname"

@@ -48,14 +48,61 @@ function getBall(balls, pickedBalls){
  
       const lastPickedBallDiv=toContainer(balls[i].number, balls[i].color)
       moveBalls(i, balls, pickedBalls)
+      // initEventListener(pickedBalls)
+      // lastPickedBallDiv.addEventListener("click", function(e){
+      //   let num = pickedBalls.findIndex(ball=>ball.number==e.target.id)
+      //   moveBalls(num, pickedBalls, balls)
+      //   // e.target.remove()
+      //   emptyContainer()
+      //   for(let i=0; i<pickedBalls.length; i++){
+      //     toContainer(pickedBalls[i].number, pickedBalls[i].color)
 
-      lastPickedBallDiv.addEventListener("click", function(e){
-        let num = pickedBalls.findIndex(ball=>ball.number==e.target.id)
-        moveBalls(num, pickedBalls, balls)
-        e.target.remove()
-      })
+      //     let testDiv=document.querySelector(".ball-container .row"+" #"+pickedBalls[i].number)
+      //     console.log(testDiv)
+      //     testDiv.addEventListener()
+      //   }
+      // })
     }
   }
+}
+
+function initEventListener(){
+
+  let ballContainerDiv=document.querySelector(".ball-container")
+  ballContainerDiv.addEventListener("click", function(e){
+
+    let target = e.target
+    if(target.className!="picked-ball") return
+    target.remove()
+    // console.log(target.id)
+
+    let pickedBallDivs=document.querySelectorAll(".picked-ball")
+    // console.log(pickedBallDivs.id)
+    let redrawBalls=[]
+    for(let i=0; i<pickedBallDivs.length; i++){
+      redrawBalls.push({"number":pickedBallDivs[i].id, "color":pickedBallDivs[i].style.backgroundColor})
+      // console.log(pickedBallDivs[i].id)
+      // console.log(pickedBallDivs[i].style.backgroundColor)
+    }
+    
+    emptyContainer()
+
+  for(let i=0; i<pickedBallDivs.length; i++){
+    toContainer(
+      redrawBalls[i].number,
+      redrawBalls[i].color
+    )
+  }
+    // let pickedBalls=    
+
+
+    // emptyContainer()
+
+    // for(let i=0; i<pickedBalls.length; i++){
+    //   toContainer(pickedBalls[i].number, pickedBalls[i].color)
+    // }
+    
+  })
 }
 
 // function organizeBalls(num, balls, pickedBalls){
@@ -69,8 +116,8 @@ function getBall(balls, pickedBalls){
 function moveBalls(num, ballsA, ballsB){
   ballsB.push(new Ball(ballsA[num].number, ballsA[num].color))
   ballsA.splice(num, 1)
-  console.log(ballsA)
-  console.log(ballsB)
+  // console.log(ballsA)
+  // console.log(ballsB)
 }
 
 function toContainer(number, color){
