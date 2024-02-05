@@ -87,9 +87,8 @@ function main() {
     balls=init()
   }
 
-  initEventListener()
-
-
+  initEventListener(balls, pickedBalls)
+  // 여기서 balls와 pickedBalls를 정확히 읽어낼 수 있는가???????
 }
 
 function init(){
@@ -116,12 +115,20 @@ function initBalls(numbers, exnumbers){
   if(exnumbers != null){
     for (let i=1; i<=numbers; i++){
       if(!exnumbers.includes(i)){
-        balls.push(new Ball(i, randomColor()))
+        // balls.push(new Ball(i, randomColor()))
+        balls.push({
+          "number":i,
+          "color":randomColor()
+        })
       }
     }
   }else{
     for (let i=1; i<=numbers; i++){
-      balls.push(new Ball(i, randomColor()))
+      // balls.push(new Ball(i, randomColor()))
+      balls.push({
+        "number":i,
+        "color":randomColor()
+      })
     }
   }
   emptyContainer()  

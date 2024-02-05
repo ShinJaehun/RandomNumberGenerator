@@ -36,8 +36,9 @@ function getBall(balls, pickedBalls){
       //   balls.push(new Ball(pickedBalls[num].number, pickedBalls[num].color))
 
       //   pickedBalls.splice(num, 1)
-      //   console.log(balls)
-      //   console.log(pickedBalls)
+      
+      // console.log(balls)
+      // console.log(pickedBalls)
 
       //   emptyContainer()
 
@@ -46,8 +47,10 @@ function getBall(balls, pickedBalls){
       //   }
       // })
  
-      const lastPickedBallDiv=toContainer(balls[i].number, balls[i].color)
+      // const lastPickedBallDiv=toContainer(balls[i].number, balls[i].color)
+      toContainer(balls[i].number, balls[i].color)
       moveBalls(i, balls, pickedBalls)
+      
       // initEventListener(pickedBalls)
       // lastPickedBallDiv.addEventListener("click", function(e){
       //   let num = pickedBalls.findIndex(ball=>ball.number==e.target.id)
@@ -66,18 +69,35 @@ function getBall(balls, pickedBalls){
   }
 }
 
-function initEventListener(){
-
+function initEventListener(balls, pickedBalls){
   let ballContainerDiv=document.querySelector(".ball-container")
   ballContainerDiv.addEventListener("click", function(e){
 
     let target = e.target
     if(target.className!="picked-ball") return
+
+    // console.log(target.id)
+    // console.log(target.style.backgroundColor)
+
+    // balls.push({
+    //   "number":target.id,
+    //   "color":target.style.backgroundColor
+    // })
+
+    if(pickedBalls.length==0) return
+    let num = pickedBalls.findIndex(ball => ball.number == target.id)
+    moveBalls(num, pickedBalls, balls)
+
+    // console.log(balls)
+    // console.log(pickedBalls)
+
     target.remove()
     // console.log(target.id)
 
     let pickedBallDivs=document.querySelectorAll(".picked-ball")
     // console.log(pickedBallDivs.id)
+
+    // console.log(balls)
     let redrawBalls=[]
     for(let i=0; i<pickedBallDivs.length; i++){
       redrawBalls.push({"number":pickedBallDivs[i].id, "color":pickedBallDivs[i].style.backgroundColor})
@@ -87,14 +107,14 @@ function initEventListener(){
     
     emptyContainer()
 
-  for(let i=0; i<pickedBallDivs.length; i++){
-    toContainer(
-      redrawBalls[i].number,
-      redrawBalls[i].color
-    )
-  }
-    // let pickedBalls=    
+    for(let i=0; i<pickedBallDivs.length; i++){
+      toContainer(
+        redrawBalls[i].number,
+        redrawBalls[i].color
+      )
+    }
 
+    // let pickedBalls=    
 
     // emptyContainer()
 
@@ -114,7 +134,11 @@ function initEventListener(){
 // }
 
 function moveBalls(num, ballsA, ballsB){
-  ballsB.push(new Ball(ballsA[num].number, ballsA[num].color))
+  // ballsB.push(new Ball(ballsA[num].number, ballsA[num].color))
+  ballsB.push({
+    "number":ballsA[num].number,
+    "color":ballsA[num].color
+  })
   ballsA.splice(num, 1)
   // console.log(ballsA)
   // console.log(ballsB)
@@ -123,7 +147,6 @@ function moveBalls(num, ballsA, ballsB){
 function toContainer(number, color){
   if(document.querySelectorAll(".ball-container .row .picked-ball").length==0 ||
     document.querySelectorAll(".ball-container .row .picked-ball").length%ballContainerColNum==0){
-    console.log("hello")
     let rowDiv=ballContainerDiv.appendChild(document.createElement("div"))
     rowDiv.className="row"
   }
@@ -134,7 +157,7 @@ function toContainer(number, color){
   colDiv.id=number
   colDiv.style="background-color:"+color
   colDiv.innerText=number
-  return colDiv
+  // return colDiv
 }
 
 function emptyContainer(){
