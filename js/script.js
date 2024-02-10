@@ -9,6 +9,9 @@ const initBtn=document.getElementById("init");
 let stopped=true
 let interval=null
 
+const balls=[]
+const pickedBalls=[]
+
 const firstN=10
 let ballContainerColNum=8
 
@@ -30,28 +33,33 @@ function main() {
     ballContainerColNum=3
   }
 
-  let balls=[]
-  let pickedBalls=[]
-  balls=init()
+  // let balls=[]
+  // let pickedBalls=[]
+  init()
   
   pickButton.addEventListener("click", function(){
     if(balls.length>1){
-      picking(balls, pickedBalls)
+      // picking(balls, pickedBalls)
+      picking()
+
     }else if(balls.length==1){
       ballDiv.innerText=balls[0].number
       ballDiv.style.backgroundColor=balls[0].color
 
-      getBall(balls, pickedBalls)
+      // getBall(balls, pickedBalls)
+      getBall()
+
       // console.log("pickButton n: "+n)
       pickButton.innerText = "다시"
-      pickedBalls=[]
+      // pickedBalls=[] 
+      // pickedBalls를 전역으로 처리하면서 여기서 이럴 필요가 없어짐
     }else{
 
       let storage=localStorage
       let total=storage['total'] ?? firstN
       let exnumbers=storage['exnumbers'] ? JSON.parse(storage['exnumbers']) : null 
 
-      balls=initBalls(total, exnumbers)
+      initBalls(total, exnumbers)
     }
   })
 
@@ -78,16 +86,21 @@ function main() {
       storage['total']=total
       storage['exnumbers']=JSON.stringify(exnumbers)
 
-      balls=initBalls(total, exnumbers)
+      // balls=initBalls(total, exnumbers)
+      initBalls(total, exnumbers)
     }
   });
   
   initBtn.onclick=function(){
     storage.clear()
-    balls=init()
+    // balls=init()
+    init()
+
   }
 
-  initEventListener(balls, pickedBalls)
+  // initEventListener(balls, pickedBalls)
+  initEventListener()
+
   // 여기서 balls와 pickedBalls를 정확히 읽어낼 수 있는가???????
 }
 
@@ -101,17 +114,18 @@ function init(){
 
   // console.log("init exnumbers: "+exnumbers)
 
-  let balls=[]
-  balls=initBalls(total, exnumbers)
+  // let balls=[]
+  // balls=initBalls(total, exnumbers)
+  initBalls(total, exnumbers)
 
-  return balls
+  // return balls
 }
   
 function initBalls(numbers, exnumbers){
   // console.log("initBalls n: "+numbers)
   // console.log("initBalls exnumbers: "+exnumbers)
 
-  let balls=[]
+  // let balls=[]
   if(exnumbers != null){
     for (let i=1; i<=numbers; i++){
       if(!exnumbers.includes(i)){
@@ -138,7 +152,7 @@ function initBalls(numbers, exnumbers){
   settingsModal.style.display="none"
 
   // console.log(balls)
-  return balls
+  // return balls
 }
 
 function randomColor(){

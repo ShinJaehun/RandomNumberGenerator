@@ -1,5 +1,6 @@
-function picking(balls, pickedBalls){
-  if(stopped){
+// function picking(balls, pickedBalls){
+function picking(){
+    if(stopped){
     stopped=false
     pickButton.innerText = "뽑아"
     interval = setInterval(function(){
@@ -15,7 +16,9 @@ function picking(balls, pickedBalls){
     playSoundEffect()
     clearInterval(interval)
     interval=null;
-    getBall(balls, pickedBalls)
+    // getBall(balls, pickedBalls)
+    getBall()
+
   }
 }
 
@@ -24,7 +27,8 @@ function playSoundEffect(){
   audio.play()
 }
 
-function getBall(balls, pickedBalls){
+// function getBall(balls, pickedBalls){
+function getBall(){
   let num=parseInt(ballDiv.textContent)
   for(let i=0; i<balls.length; i++){
     if(balls[i].number==num){
@@ -69,7 +73,9 @@ function getBall(balls, pickedBalls){
   }
 }
 
-function initEventListener(balls, pickedBalls){
+// function initEventListener(balls, pickedBalls){
+
+function initEventListener(){
   let ballContainerDiv=document.querySelector(".ball-container")
   ballContainerDiv.addEventListener("click", function(e){
 
@@ -84,7 +90,10 @@ function initEventListener(balls, pickedBalls){
     //   "color":target.style.backgroundColor
     // })
 
-    if(pickedBalls.length==0) return
+    if(pickedBalls.length==0) {
+      // console.log("여기서 return 해버리는거야?")
+      return
+    }
     let num = pickedBalls.findIndex(ball => ball.number == target.id)
     moveBalls(num, pickedBalls, balls)
 
