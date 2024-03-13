@@ -126,6 +126,20 @@ function initBalls(numbers, exnumbers){
   // console.log("initBalls exnumbers: "+exnumbers)
 
   // let balls=[]
+
+  // console.log(balls.length)
+  let balls_length = balls.length
+  for (let i=0; i < balls_length; i++) {
+    balls.pop()
+    // console.log(balls)
+  }
+
+  // console.log(pickedBalls.length)
+  let pickedBalls_length = pickedBalls.length
+  for (let i=0; i < pickedBalls_length; i++) {
+    pickedBalls.pop()
+  }
+
   if(exnumbers != null){
     for (let i=1; i<=numbers; i++){
       if(!exnumbers.includes(i)){
